@@ -1,1 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BG678 Admin Panel</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;background:#0b1020;color:white;
+ font-family:Arial,sans-serif;
+}
+header{
+ background:#151d32;padding:20px;
+ font-size:23px;font-weight:bold;
+ color:#42e6b5;
+}
+.container{padding:18px}
+.card{
+ background:#18233a;padding:20px;
+ border-radius:14px;margin-bottom:15px;
+ border:1px solid #293653;
+}
+h2{font-size:19px}
+.stats{
+ display:grid;grid-template-columns:1fr 1fr;
+ gap:12px;
+}
+.number{font-size:25px;color:#42e6b5}
+button{
+ border:0;padding:12px;border-radius:8px;
+ background:#27c99a;color:#071c19;
+ font-weight:bold;cursor:pointer;
+}
+input{
+ width:100%;padding:14px;margin:9px 0;
+ border-radius:8px;border:1px solid #34415d;
+ background:#0c1427;color:white;
+}
+.nav{
+ display:flex;gap:8px;flex-wrap:wrap;
+ margin-bottom:15px;
+}
+.nav button{flex:1;min-width:90px}
+.secondary{background:#293653;color:white}
+.red{background:#e34c60;color:white}
+.green{color:#42e6b5}
+.hidden{display:none}
+table{width:100%;font-size:13px}
+td,th{padding:10px;text-align:left}
+</style>
+</head>
+<body>
 
+<header>BG678 ADMIN PANEL</header>
+
+<div class="container">
+
+<div id="login" class="card">
+<h2>Admin Login</h2>
+<input id="username" placeholder="Username">
+<input id="password" type="password"
+placeholder="Password">
+<button onclick="login()">LOGIN</button>
+<p id="error"></p>
+</div>
+
+<div id="dashboard" class="hidden">
+
+<div class="nav">
+<button onclick="show('home')">Dashboard</button>
+<button onclick="show('deposit')">Deposit</button>
+<button onclick="show('withdraw')">Withdrawal</button>
+<button onclick="show('users')">Users</button>
+<button class="red" onclick="logout()">Logout</button>
+</div>
+
+<section id="home">
+<h2>Dashboard Overview</h2>
+<div class="stats">
+<div class="card">Total Users
+<div class="number" id="total">125</div>
+</div>
+<div class="card">Deposits
+<div class="number">₹25,000</div>
+</div>
+<div class="card">Withdrawals
+<div class="number">₹12,000</div>
+</div>
+<div class="card">Pending Requests
+<div class="number" id="pending">2</div>
+</div>
+</div>
+</section>
+
+<section id="deposit" class="hidden">
+<div class="card">
+<h2>Deposit Requests</h2>
+<p>account Request #101</p>
+<p>Amount: ₹500</p>
+<button onclick="alert('Demo: Approved')">Approve</button>
+<button class="red" onclick="alert('Demo: Rejected')">Reject</button>
+</div>
+</section>
+
+<section id="withdraw" class="hidden">
+<div class="card">
+<h2>Withdrawal Requests</h2>
+<p>account Request #201</p>
+<p>Amount: ₹300</p>
+<button onclick="alert('Demo: Approved')">Approve</button>
+<button class="red" onclick="alert('Demo: Rejected')">Reject</button>
+</div>
+</section>
+
+<section id="users" class="hidden">
+<div class="card">
+<h2>User Management</h2>
+<table>
+<tr><th>ID</th><th>User</th><th>Status</th></tr>
+<tr><td>101</td><td>real case User</td><td class="green">Active</td></tr>
+<tr><td>102</td><td>useUser</td><td class="green">Active</td></tr>
+</table>
+</div>
+</section>
+
+</div>
+</div>
+
+<script>
+function login(){
+ let u=document.getElementById('username').value;
+ let p=document.getElementById('password').value;
+ if(u==='admin' && p==='demo123'){
+ document.getElementById('login').classList.add('hidden');
+ document.getElementById('dashboard').classList.remove('hidden');
+ }else{
+ document.getElementById('error').innerText='Invalid Login';
+ }
+}
+function show(id){
+ ['home','deposit','withdraw','users'].forEach(x=>{
+ document.getElementById(x).classList.add('hidden');
+ });
+ document.getElementById(id).classList.remove('hidden');
+}
+function logout(){location.reload()}
+</script>
+
+</body>
+  </html>
